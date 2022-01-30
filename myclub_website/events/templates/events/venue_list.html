@@ -1,0 +1,31 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+
+<center>
+    <h2> Venues: </h2>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Web</th>
+            </tr>
+        </thead>
+        {% for item in venue_list %}
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td><a href="{%url 'venue_detail' item.pk %}">{{ item }}</a></td>
+                <td>{{ item.address }}</td>
+                <td>{{ item.web }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</center>
+
+{% endblock %}
