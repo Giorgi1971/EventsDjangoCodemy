@@ -25,7 +25,8 @@
               </ul>
           </ul>
               </p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <a href="{% url 'event_update' item.id %}" class="btn btn-outline-secondary btn-sm">Update Event</a>
+          <a href="{% url 'event_delete' item.id %}" class="btn btn-outline-danger btn-sm">Delete Event</a>
         </div>
 
       </div>

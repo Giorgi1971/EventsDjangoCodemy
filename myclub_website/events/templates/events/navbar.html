@@ -10,10 +10,13 @@
             <a class="nav-link active" aria-current="page" href="{% url 'list-events' %}">Events</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'add_venue' %}">Add Venue</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'event_add' %}">Add Event</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="{% url 'list_venue' %}">Venues</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'add_venue' %}">Add Venue</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'home' '2022' 'March' %}">March 2022</a>
@@ -36,9 +39,10 @@
             <a class="nav-link active" aria-current="page" href="{% url 'admin:index' %}">Admin</a>
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+        <form class="d-flex" method="POST" action="{% url 'search_venue' %}">
+          {% csrf_token %}
+          <input class="form-control me-2" type="search" placeholder="Search Vanues" aria-label="Search" name="q">
+          <button class="btn btn-outline-secondary" type="submit">Search</button>
         </form>
       </div>
     </div>

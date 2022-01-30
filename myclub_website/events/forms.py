@@ -23,3 +23,27 @@ class VenueForm(ModelForm):
             'web': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Web address'}),
             'email_address': forms.EmailInput(attrs={'class':'form-control', 'placeholder':'Email'}),
         }
+
+
+
+class EventForm(ModelForm):
+    class Meta:
+        model = Event
+        fields = "__all__"
+        labels = {
+            'name': "",
+            'event_date':'YYYY-MM-DD',
+            'venue': 'Venue',
+            'manager': "Manager",
+            'attendees': "Attendees",           
+            'description': "",
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Event Name'}),
+            'event_date': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Event Date'}),
+            'venue': forms.Select(attrs={'class':'form-select', 'placeholder':'Venue'}),
+            'manager': forms.Select(attrs={'class':'form-select', 'placeholder':'Event Maneger'}),
+            'attendees': forms.SelectMultiple(attrs={'class':'form-select', 'placeholder':'Attendees'}),
+            'description': forms.Textarea(attrs={'class':'form-control', 'placeholder':'Description'}),
+        }
+

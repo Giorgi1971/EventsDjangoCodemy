@@ -12,6 +12,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Address</th>
                 <th scope="col">Web</th>
+                <th scope="col">Update</th>
             </tr>
         </thead>
         {% for item in venue_list %}
@@ -21,6 +22,8 @@
                 <td><a href="{%url 'venue_detail' item.pk %}">{{ item }}</a></td>
                 <td>{{ item.address }}</td>
                 <td>{{ item.web }}</td>
+                <td><a class="btn btn-outline-secondary btn-sm" href="{%url 'venue_update' item.pk %}"> Update</a>
+                    <a class="btn btn-outline-danger btn-sm" href="{%url 'venue_delete' item.pk %}"> Delete</a></td>
             </tr>
         {% endfor %}
         </tbody>

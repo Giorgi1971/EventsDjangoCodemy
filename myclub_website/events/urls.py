@@ -17,6 +17,12 @@ urlpatterns = [
     path('add_venue/', views.add_venue,  name='add_venue'),
     path('list_venue/', views.list_venue,  name='list_venue'),
     path('venue/<venue_id>/', views.venue_detail,  name='venue_detail'),
-    # path('venue/', views.add_venue,  name='add_venue'),
+    path('search_venue/', views.search_venue,  name='search_venue'),
+    path('venue_update/<venue_id>/', views.venue_update,  name='venue_update'),
+    path('event_update/<event_id>/', views.event_update,  name='event_update'),
+    path('event_add/', views.event_add,  name='event_add'),
+    path('event_delete/<event_id>/', views.event_delete,  name='event_delete'),
+    path('venue_delete/<venue_id>/', views.venue_delete,  name='venue_delete'),
+
 ]
 
