@@ -20,3 +20,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('events.urls')),
 ]
+
+# ადმინის გვერდზე სათაურები შევცვალეთ, ასევე ვირტუალური გარემოდან შეგიძლია სტატიკ - ცსს ნახო და იგივე შენ სტატიკში ჩასვა და შეცვალოო. საინტერესოა
+admin.site.site_header = "My Club Administrations"
+admin.site.site_title = "Browser Title"
+admin.site.index_title = "Welcome admin area"
