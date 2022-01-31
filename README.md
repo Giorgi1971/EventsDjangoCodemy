@@ -18,6 +18,7 @@ This is Events App from codemy wensday (Youtube)
 * .\env\Scripts\activate (ვირტუალური გარემოს აქტივიზაცია ვინდოუსში)
 * source env/bin/activate (აქტივიზაცია ლინუქსა ან მაკ ზე)
 * python -m pip install Django (ჯანგოს დაყენება)
+* https://github.com/ddatunashvili/flask_auto_association?fbclid=IwAR21fetsaMelgYAlg16uIRvEK3GcDgmVVu_hLgdV4_b4E-smPXgpGvynyPs#start-of-content
 
 > აქ იქნება ჩაწერილი ამ ლექციების დროს ახალი ან საინტერესო ბრაძნებები:
 
