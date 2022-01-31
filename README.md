@@ -1,6 +1,4 @@
 # EventsDjangoCodemy
-<br />
-<br />
 
 This is Events App from codemy wensday (Youtube)
 <br />
