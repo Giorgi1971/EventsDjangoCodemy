@@ -1,6 +1,7 @@
-# EventsDjangoCodemy__
+# EventsDjangoCodemy
 
-This is Events App from codemy wensday (Youtube)__
+
+This is Events App from codemy wensday (Youtube)
 
 ## codemy wednesday (YouTube-ს არხი)
 ### Django-ს ვიდეო გაკვეთილები event-ს შექმნაზე____
