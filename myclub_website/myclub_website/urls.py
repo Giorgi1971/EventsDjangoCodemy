@@ -19,9 +19,11 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('events.urls')),
+    path('members/', include('django.contrib.auth.urls')),
+    path('members/', include('members.urls')),
 ]
 
-# ადმინის გვერდზე სათაურები შევცვალეთ, ასევე ვირტუალური გარემოდან შეგიძლია სტატიკ - ცსს ნახო და იგივე შენ სტატიკში ჩასვა და შეცვალოო. საინტერესოა
+# ადმინის გვერდზე სათაურები შევცვალეთ, ასევე ვირტუალური გარემოდან შეგიძლია სტატიკ - ცსს ნახო და იგივე შენ სტატიკში ჩასვა და შეცვალოო. საინტერესოა 
 admin.site.site_header = "My Club Administrations"
 admin.site.site_title = "Browser Title"
 admin.site.index_title = "Welcome admin area"
