@@ -6,7 +6,73 @@ from calendar import HTMLCalendar, LocaleHTMLCalendar, month_name
 from datetime import datetime
 from .models import *
 from .forms import *
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, FileResponse
+import csv
+import io
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
+
+
+
+#  CSV ფაილში მონაცემების შენახვა
+def venue_pdf(request):
+    # Create Bytestream buffer
+    buf = io.BytesIO()
+    # create cunvas
+    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+    # Create a text Object
+    textob = c.beginText()
+    textob.setTextOrigin(inch, inch)
+    textob.setFont("Helvetica", 18)
+
+    venues = Venue.objects.all()
+    lines = []
+    # add some lines of text
+    for venue in venues:
+        lines.append(venue.name)
+        lines.append(venue.address)
+        lines.append(venue.zip_code)
+        lines.append(venue.phone)
+        lines.append(" ")
+    for line in lines:
+        textob.textLine(line)
+    # Finish Up
+    c.drawText(textob)
+    c.showPage()
+    c.save()
+    buf.seek(0)
+
+    return FileResponse(buf, as_attachment=True, filename='venue_pdf.pdf')
+
+
+#  CSV ფაილში მონაცემების შენახვა
+def venue_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename=venues.csv'
+    #  Create a csv writer
+    writer = csv.writer(response)
+    # Designate The Model
+    venues = Venue.objects.all()
+    # Add column heading to the csv file
+    writer.writerow(['Name', "Adress", 'Zip code', 'Web'])
+    # loop thu and output
+    for venue in venues:
+        writer.writerow([venue, venue.address, venue.zip_code, venue.web])
+    return response
+
+#  ტექსტურ ფაილში მონაცემების შენახვა
+def venue_text(request):
+    response = HttpResponse(content_type='text/plain')
+    response['Content-Disposition'] = 'attachment; filename=venues.txt'
+    venues = Venue.objects.all()
+    lines = []
+    for venue in venues:
+        lines.append(f'{venue}\n\n , {venue.address}\n\n , {venue.zip_code}\n\n, {venue}\n\n,   --- ')
+
+    # lines = ["Line  1\n", "Line 2\n", "line3/\n"]
+    response.writelines(lines)
+    return response
 
 
 def venue_delete(request, venue_id):
