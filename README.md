@@ -12,10 +12,12 @@ This is Events App from codemy wensday (Youtube)
 სასურველია ეს ყოველივე დააყენოთ ვირტუალურ გარემოში.
 გამოსაყენებელი ბრძანებები, რომლებიც აქედან შეიძლება გავიხსენო:
 * python3 -m venv env (ვირტუალური გარემოს შექმნა) 
+* python3 -m venv env (ლინუქსა ან მაკ ზე)
 * pip freeze > requirements.txt (მოდულების ჩამონათვალის შექმნა)
 * pip install pipreqs
 * .\env\Scripts\activate (ვირტუალური გარემოს აქტივიზაცია ვინდოუსში)
 * source env/bin/activate (აქტივიზაცია ლინუქსა ან მაკ ზე)
+* python -m pip install Django (ჯანგოს დაყენება)
 
 > აქ იქნება ჩაწერილი ამ ლექციების დროს ახალი ან საინტერესო ბრაძნებები:
 
