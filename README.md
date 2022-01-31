@@ -20,7 +20,8 @@ This is Events App from codemy wensday (Youtube)
 * https://github.com/ddatunashvili/flask_auto_association?fbclid=IwAR21fetsaMelgYAlg16uIRvEK3GcDgmVVu_hLgdV4_b4E-smPXgpGvynyPs#start-of-content
 
 > ლექციების დროს ჩემთვის ახალი ან საინტერესო შენიშვნები:
-** ამ პროექტში გვაქვს საიტის მონაცემების შენახვა .txt .pdf ან .csv (ექსელის ფაილი) ფორმატში
+* ამ პროექტში გვაქვს საიტის მონაცემების შენახვა .txt .pdf ან .csv (ექსელის ფაილი) ფორმატში
 * venue_list = Venue.objects.all().order_by('?') - აბრუნებს ყოველ ჯერზე ახალ მიმდევრობას
+* 
 
 
