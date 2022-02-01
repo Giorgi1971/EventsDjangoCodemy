@@ -11,9 +11,8 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
 from django.core.paginator import Paginator
-
-
-
+from django.contrib import messages
+from django.contrib.auth.models import User
 
 
 #  CSV ფაილში მონაცემების შენახვა
@@ -84,7 +83,11 @@ def venue_delete(request, venue_id):
 
 def event_delete(request, event_id):
     event = Event.objects.get(pk=event_id)
-    event.delete()
+    if request.user == event.manager:
+        event.delete()
+        messages.success(request, ('That all done'))
+    else:
+        messages.success(request, ('You have not permishen delete this event'))
     return redirect('list-events')
 
 
@@ -152,7 +155,8 @@ def search_venue(request):
 
 def venue_detail(request, venue_id):
     venue = Venue.objects.get(pk=venue_id)
-    return render(request, 'events/venue_detail.html', {'venue':venue})
+    venue_owner = User.objects.get(pk=venue.owner)
+    return render(request, 'events/venue_detail.html', {'venue':venue, 'venue_owner':venue_owner})
 
 
 def list_venue(request):
