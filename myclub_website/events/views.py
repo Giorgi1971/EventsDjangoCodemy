@@ -15,6 +15,20 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 
 
+
+def my_events(request):
+    if request.user.is_authenticated:
+        print('----')
+        me = request.user.id # აქ დამსწარეების აიდის უნდა იღებდეს და შეცდომით უსერის აიდის იღებს. სხვა გზა არ აქვს
+        events = Event.objects.filter(attendees=me)
+        return render(request, 'events/my_events.html', {'events':events})
+    else:
+        messages.success(request, ('You have not permishen View this Page!'))
+        return redirect('home')
+
+
+
+
 #  CSV ფაილში მონაცემების შენახვა
 def venue_pdf(request):
     # Create Bytestream buffer
