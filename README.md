@@ -22,6 +22,11 @@ This is Events App from codemy wensday (Youtube)
 > ## ლექციების დროს ჩემთვის ახალი ან საინტერესო შენიშვნები:
 * ამ პროექტში გვაქვს საიტის მონაცემების შენახვა .txt .pdf ან .csv (ექსელის ფაილი) ფორმატში
 * venue_list = Venue.objects.all().order_by('?') - აბრუნებს ყოველ ჯერზე ახალ მიმდევრობას
-* 
+*     if request.method == 'POST':
+        form = VenueForm(request.POST)
+        if form.is_valid():
+            venue = form.save(commit=False)
+            venue.owner = request.user.id
+            venue.save()
 
 
