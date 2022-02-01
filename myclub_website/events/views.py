@@ -1,5 +1,3 @@
-import imp
-from os import name
 from django.shortcuts import redirect, render
 import calendar
 from calendar import HTMLCalendar, LocaleHTMLCalendar, month_name
@@ -93,12 +91,28 @@ def event_delete(request, event_id):
 def event_add(request):
     submitted = False
     if request.method == 'POST':
-        form = EventForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect('/event_add?submitted=True')
+        if request.user.is_superuser:
+            form = EventAdminForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return HttpResponseRedirect('/event_add?submitted=True')
+        else:
+            form = EventForm(request.POST)
+            print('user form norm')
+
+            if form.is_valid():
+                print('user norm')
+                event = form.save(commit=False)
+                event.manager = request.user
+                if event.manager == request.user:
+                    print('good')
+                event.save()
+                return HttpResponseRedirect('/event_add?submitted=True')
     else:
-        form = EventForm
+        if request.user.is_superuser:
+            form = EventAdminForm
+        else:
+            form = EventForm
         if 'submitted' in request.GET:
             submitted = True
     return render(request, 'events/event_add.html', {'form':form, 'submitted':submitted})
@@ -106,7 +120,10 @@ def event_add(request):
 
 def event_update(request, event_id):
     event = Event.objects.get(pk=event_id)
-    form = EventForm(request.POST or None, instance=event)
+    if request.user.is_superuser:
+        form = EventAdminForm(request.POST or None, instance=event)
+    else:
+        form = EventForm(request.POST or None, instance=event)
     if form.is_valid():
         form.save()
         return redirect('list-events')
@@ -155,7 +172,9 @@ def add_venue(request):
     if request.method == 'POST':
         form = VenueForm(request.POST)
         if form.is_valid():
-            form.save()
+            venue = form.save(commit=False)
+            venue.owner = request.user.id
+            venue.save()
             return HttpResponseRedirect('/add_venue?submitted=True')
     else:
         form = VenueForm

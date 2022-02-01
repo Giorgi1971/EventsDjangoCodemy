@@ -27,11 +27,12 @@
                 <td>{{ item.address }}</td>
                 <td>{{ item.web }}</td>
                 {% if user.is_authenticated %}
+                {% if user.id == item.owner %}
                 <td>
-
                     <a class="btn btn-outline-secondary btn-sm" href="{%url 'venue_update' item.pk %}"> Update</a>
                     <a class="btn btn-outline-danger btn-sm" href="{%url 'venue_delete' item.pk %}"> Delete</a>
                 </td>
+                {% endif %}
                 {% endif %}
 
             </tr>

@@ -26,8 +26,10 @@
         </ul>
         </p>
         {% if user.is_authenticated %}
+        {% if user == item.manager %}
         <a href="{% url 'event_update' item.id %}" class="btn btn-outline-secondary btn-sm">Update Event</a>
         <a href="{% url 'event_delete' item.id %}" class="btn btn-outline-danger btn-sm">Delete Event</a>
+        {% endif %}
         {% endif %}
     </div>
 </div>

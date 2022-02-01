@@ -6,7 +6,7 @@ from . models import *
 class VenueForm(ModelForm):
     class Meta:
         model = Venue
-        fields = "__all__"
+        fields = ('name', 'address', 'zip_code', 'phone', 'web', 'email_address')
         labels = {
             'name': "",
             'address':'',
@@ -27,6 +27,30 @@ class VenueForm(ModelForm):
 
 
 class EventForm(ModelForm):
+    class Meta:
+        model = Event
+        fields = ( 'name', 'event_date', 'venue', 'attendees', 'description')
+        labels = {
+            'name': "",
+            'event_date':'YYYY-MM-DD',
+            'venue': 'Venue',
+            'attendees': "Attendees",           
+            'description': "",
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Event Name'}),
+            'event_date': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Event Date'}),
+            'venue': forms.Select(attrs={'class':'form-select', 'placeholder':'Venue'}),
+            # 'manager': forms.Select(attrs={'class':'form-select', 'placeholder':'Event Maneger'}),
+            'attendees': forms.SelectMultiple(attrs={'class':'form-select', 'placeholder':'Attendees'}),
+            'description': forms.Textarea(attrs={'class':'form-control', 'placeholder':'Description'}),
+        }
+
+
+
+
+
+class EventAdminForm(ModelForm):
     class Meta:
         model = Event
         fields = "__all__"
