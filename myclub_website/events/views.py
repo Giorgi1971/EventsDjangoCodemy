@@ -16,6 +16,9 @@ from django.contrib.auth.models import User
 
 
 
+
+
+
 def my_events(request):
     if request.user.is_authenticated:
         print('----')
@@ -25,8 +28,6 @@ def my_events(request):
     else:
         messages.success(request, ('You have not permishen View this Page!'))
         return redirect('home')
-
-
 
 
 #  CSV ფაილში მონაცემების შენახვა
@@ -154,6 +155,17 @@ def venue_update(request, venue_id):
         form.save()
         return redirect('list_venue')
     return render(request, 'events/venue_update.html', {'venue':venue, 'form':form})
+
+def search_events(request):
+    if request.method =="POST":
+        searched = request.POST['q']
+        events = Event.objects.filter(description__contains=searched)
+        return render(request, 'events/search_events.html', {
+            'searched':searched,
+            'events':events
+            })
+    return render(request, 'events/search_events.html', {})
+
 
 
 def search_venue(request):
