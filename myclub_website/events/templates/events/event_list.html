@@ -3,37 +3,38 @@
 
 {% block content %}
 
-    <h2>        Events:    </h2>
-    {% for item in event_list %}
+<h2> Events: </h2>
+{% for item in event_list %}
 
-    <div class="card">
-        <div class="card-header">
-            {{ item }}
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">Venue: {{ item.venue }}</h5>
-            <p class="card-text">
-          <ul>
-              <li>Date: {{ item.event_date }}</li>
-              <li>Venue: {{ item.venue.web }}</li>
-              <li>Manager: {{ item.manager }}</li>
-              <li>Desc: {{ item.description }}</li>
-              <ul>
-                  {% for user in item.attendees.all %}
-                  <li>Atendees: {{ user }}</li>
-                  {% endfor %}
-              </ul>
-          </ul>
-              </p>
-          <a href="{% url 'event_update' item.id %}" class="btn btn-outline-secondary btn-sm">Update Event</a>
-          <a href="{% url 'event_delete' item.id %}" class="btn btn-outline-danger btn-sm">Delete Event</a>
-        </div>
-
-      </div>
+<div class="card">
+    <div class="card-header">
+        {{ item }}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Venue: {{ item.venue }}</h5>
+        <p class="card-text">
+        <ul>
+            <li>Date: {{ item.event_date }}</li>
+            <li>Venue: {{ item.venue.web }}</li>
+            <li>Manager: {{ item.manager }}</li>
+            <li>Desc: {{ item.description }}</li>
+            <ul>
+                {% for user in item.attendees.all %}
+                <li>Atendees: {{ user }}</li>
+                {% endfor %}
+            </ul>
+        </ul>
+        </p>
+        {% if user.is_authenticated %}
+        <a href="{% url 'event_update' item.id %}" class="btn btn-outline-secondary btn-sm">Update Event</a>
+        <a href="{% url 'event_delete' item.id %}" class="btn btn-outline-danger btn-sm">Delete Event</a>
+        {% endif %}
+    </div>
+</div>
 <br>
 
 
 
-    {% endfor %}
+{% endfor %}
 
 {% endblock %}

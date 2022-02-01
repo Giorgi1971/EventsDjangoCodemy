@@ -12,7 +12,11 @@
                 <th scope="col">Name</th>
                 <th scope="col">Address</th>
                 <th scope="col">Web</th>
+                {% if user.is_authenticated %}
+
                 <th scope="col">Update</th>
+                {% endif %}
+
             </tr>
         </thead>
         {% for item in venues %}
@@ -22,12 +26,16 @@
                 <td><a href="{%url 'venue_detail' item.pk %}">{{ item }}</a></td>
                 <td>{{ item.address }}</td>
                 <td>{{ item.web }}</td>
+                {% if user.is_authenticated %}
                 <td>
+
                     <a class="btn btn-outline-secondary btn-sm" href="{%url 'venue_update' item.pk %}"> Update</a>
                     <a class="btn btn-outline-danger btn-sm" href="{%url 'venue_delete' item.pk %}"> Delete</a>
                 </td>
+                {% endif %}
+
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 
@@ -44,8 +52,8 @@
     <br>
     <nav aria-label="...">
         <ul class="pagination justify-content-center">
-            
-            
+
+
             {% if venues.has_previous %}
             <li class="page-item">
                 <a class="page-link" href="?page=1">&laquo First</a>
@@ -54,7 +62,7 @@
                 <a class="page-link" href="?page={{ venues.previous_page_number }}">Previos</a>
             </li>
             {% endif %}
-            
+
             <li class="page-item disabled">
                 <a class="page-link" href="">
                     Page {{venues.number}} of {{venues.paginator.num_pages}}
@@ -68,7 +76,7 @@
                 </a>
             </li>
             {% endfor %} -->
-            
+
             {% if venues.has_next %}
             <li class="page-item">
                 <a class="page-link" href="?page={{ venues.next_page_number }}">Next</a>
@@ -79,7 +87,7 @@
             {% endif %}
         </ul>
     </nav>
-    
+
 
 </center>
 
