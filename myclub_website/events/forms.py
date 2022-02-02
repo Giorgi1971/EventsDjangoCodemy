@@ -6,14 +6,16 @@ from . models import *
 class VenueForm(ModelForm):
     class Meta:
         model = Venue
-        fields = ('name', 'address', 'zip_code', 'phone', 'web', 'email_address')
+        fields = ('name', 'address', 'zip_code', 'phone', 'web', 'email_address', 'venue_image')
         labels = {
             'name': "",
             'address':'',
             'zip_code': '',
             'phone': "",
             'web': "",
-            'email_address': "",           
+            'email_address': "",  
+            'venue_image': "",
+
         }
         widgets = {
             'name': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Vanue Name'}),
@@ -22,6 +24,7 @@ class VenueForm(ModelForm):
             'phone': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Phone number'}),
             'web': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Web address'}),
             'email_address': forms.EmailInput(attrs={'class':'form-control', 'placeholder':'Email'}),
+            # 'email_address': forms.EmailInput(attrs={'class':'form-control', 'placeholder':'Email'}),
         }
 
 

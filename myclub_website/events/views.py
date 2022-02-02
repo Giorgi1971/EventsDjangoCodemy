@@ -202,16 +202,21 @@ def list_venue(request):
 def add_venue(request):
     submitted = False
     if request.method == 'POST':
-        form = VenueForm(request.POST)
+        form = VenueForm(request.POST, request.FILES)
         if form.is_valid():
+            print('valid')
             venue = form.save(commit=False)
             venue.owner = request.user.id
             venue.save()
+            print(venue)
             return HttpResponseRedirect('/add_venue?submitted=True')
     else:
-        form = VenueForm
+        print('hhere')
+        form = VenueForm()
         if 'submitted' in request.GET:
+            print('subbb')
             submitted = True
+    print('999')
     return render(request, 'events/add_venue.html', {'form':form, 'submitted':submitted})
 
 

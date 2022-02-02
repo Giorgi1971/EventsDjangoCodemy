@@ -14,5 +14,13 @@
 </a> </h5>
 <h5> {{ venue.email_address }} </h5>
 <h5>Owner: {{ venue_owner }} </h5>
+    
+    <br>
+{%if venue.venue_image%}
+<img style="width: 300px;" src="{{ venue.venue_image.url }}" alt="asasasa"> 
+
+
+{%endif%}
+
 </center>
 {% endblock %}
