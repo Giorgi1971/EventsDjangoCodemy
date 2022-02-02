@@ -10,4 +10,47 @@
         {{ cal | safe }}
     </h2>
 </center>
+<br>
+<h3>
+    Events This Month:
+</h3>
+
+{% if event_month %}
+{% for item in event_month %}
+
+<div class="card">
+    <div class="card-header">
+        {{ item }}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Venue: {{ item.venue }}</h5>
+        <p class="card-text">
+        <ul>
+            <li>Date: {{ item.event_date }}</li>
+            <li>Venue: {{ item.venue.web }}</li>
+            <li>Manager: {{ item.manager }}</li>
+            <li>Desc: {{ item.description }}</li>
+            <ul>
+                {% for user in item.attendees.all %}
+                <li>Atendees: {{ user }}</li>
+                {% endfor %}
+            </ul>
+        </ul>
+        </p>
+        {% if user.is_authenticated %}
+        {% if user == item.manager %}
+        <a href="{% url 'event_update' item.id %}" class="btn btn-outline-secondary btn-sm">Update Event</a>
+        <a href="{% url 'event_delete' item.id %}" class="btn btn-outline-danger btn-sm">Delete Event</a>
+        {% endif %}
+        {% endif %}
+    </div>
+</div>
+{%endfor%}
+{% else %}
+Sorry, N Events in this month...
+
+{%endif%}
+
+
+
 {% endblock %}

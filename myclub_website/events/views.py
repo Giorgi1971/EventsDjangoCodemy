@@ -1,3 +1,4 @@
+from asyncio import events
 from django.shortcuts import redirect, render
 import calendar
 from calendar import HTMLCalendar, LocaleHTMLCalendar, month_name
@@ -159,6 +160,7 @@ def venue_update(request, venue_id):
 def search_events(request):
     if request.method =="POST":
         searched = request.POST['q']
+        print(searched)
         events = Event.objects.filter(description__contains=searched)
         return render(request, 'events/search_events.html', {
             'searched':searched,
@@ -228,6 +230,8 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
     #  GET cuurent year 
     now = datetime.now()
     current_year = now.year
+
+    event_month = Event.objects.filter(event_date__year=year, event_date__month=month_number)
     time = now.strftime('%I:%M:%S %p')
     time2 = now.strftime('%I:%M %p')
 
@@ -240,4 +244,5 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
         'current_year':current_year,
         'time': time,
         'time2': time2,
+        'event_month':event_month,
     })
