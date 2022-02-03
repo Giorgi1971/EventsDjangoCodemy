@@ -16,10 +16,6 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 
 
-
-
-
-
 def my_events(request):
     if request.user.is_authenticated:
         print('----')
