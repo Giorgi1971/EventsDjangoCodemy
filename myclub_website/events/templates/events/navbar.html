@@ -21,17 +21,20 @@
             <li><a class="dropdown-item" href="{% url 'event_add' %}">Add Event</a></li>
             <li><a class="dropdown-item" href="{% url 'my_events' %}">My Events</a></li>
             <li><a class="dropdown-item" href="{% url 'search_events' %}">Search Events</a></li>
+            {% if user.is_superuser %}
+            <li><a class="dropdown-item" href="{% url 'admin_aprroval' %}">Admin Aprroval</a></li>
+            {% endif %}
             {% endif %}
           </ul>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            Venues
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          aria-expanded="false">
+          Venues
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="{% url 'list_venue' %}">All Venue</a></li>
-        {% if user.is_authenticated %}
+            {% if user.is_authenticated %}
             <li><a class="dropdown-item" href="{% url 'add_venue' %}">Add Venue</a></li>
             {% endif %}
           </ul>
@@ -40,10 +43,11 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'logout' %}">Logout</a>
         </li>
-        {% else %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'register' %}">Register</a>
         </li>
+        
+        {% else %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'login' %}">Login</a>
         </li>
@@ -66,13 +70,41 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'admin:index' %}">Admin</a>
         </li>
+
+        {% if user.is_superuser %}
+
         <li class="nav-item">
-          <a class="nav-link active text-danger" aria-current="page" href="">
+          <a class="nav-link active text-danger" aria-current="page" href="{% url 'admin_aprroval' %}">
             <strong>
               {{ user }}
             </strong>
           </a>
         </li>
+        {% else %}
+
+        {% if user.is_authenticated %}
+
+        <li class="nav-item">
+          <a class="nav-link active text-danger" aria-current="page" href="#">
+            <strong>
+            Welcome {{ user }}!
+            </strong>
+          </a>
+        </li>
+        
+        {% else %}
+
+        <li class="nav-item">
+          <a class="nav-link active text-danger" aria-current="page" href="">
+            <strong>
+              Welcome Guest!
+            </strong>
+          </a>
+        </li>
+        {% endif %}
+        {% endif %} 
+
+
       </ul>
       <form class="d-flex" method="POST" action="{% url 'search_venue' %}">
         {% csrf_token %}

@@ -1,4 +1,6 @@
 from asyncio import events
+import re
+from turtle import setundobuffer
 from django.shortcuts import redirect, render
 import calendar
 from calendar import HTMLCalendar, LocaleHTMLCalendar, month_name
@@ -14,6 +16,28 @@ from reportlab.lib.pagesizes import letter
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth.models import User
+
+# admin approval
+def admin_aprroval(request):
+    event_list = Event.objects.all().order_by('-event_date')
+    if request.user.is_superuser:
+        if request.method == "POST":
+            id_list = request.POST.getlist('boxes')
+            print(id_list)
+            event_list.update(approved=False)
+            for x in id_list:
+                Event.objects.filter(pk=int(x)).update(approved=True)
+
+            messages.success(request, 'Event List Approval Updated')
+            return redirect('list-events')
+
+        else:
+            return render(request,  'events/admin_approval.html', {"event_list":event_list})
+    else:
+        messages.success(request, 'You arenot autorized for this page')
+        return redirect('home')
+    # return render(request, 'events/admin_approval.html')
+
 
 
 def my_events(request):
