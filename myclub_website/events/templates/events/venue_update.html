@@ -3,14 +3,22 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
 <center>
 
     <h3>Update: </h3>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Update" class="btn btn-secondary">
     </form>
+    {% else %}
+
+<h2>
+    Sorry, You must be Looged In to view This Page!
+</h2>
+<h3><a href="{% url 'login' %}">Login Here</a></h3>
+    {% endif %}
 
 </center>
 {% endblock %}
