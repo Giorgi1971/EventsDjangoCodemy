@@ -32,6 +32,7 @@ class Event(models.Model):
     manager =   models.ForeignKey(User, blank=True, null=True, on_delete=models.SET_NULL)
     description = models.TextField(blank=True, null=True)
     attendees = models.ManyToManyField(MyClubUser, blank=True)
+    approved = models.BooleanField('Aprrovedd', default=False)
 
     def __str__(self) -> str:
         return self.name
@@ -51,3 +52,4 @@ class Event(models.Model):
         else:
             thing = "Future"
         return thing
+ 
