@@ -17,9 +17,32 @@ from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth.models import User
 
+
+def show_event(request, pk):
+    event = Event.objects.get(pk=pk)
+    return render(request, 'events/show_event.html', {'item':event})
+
+
+def venue_events(request, venue_id):
+    ven = Venue.objects.get(pk=venue_id)
+    venue_s = Event.objects.filter(venue=ven)
+    if venue_s:
+        return render(request, 'events/venue_events.html', {'venue_events':venue_s}) 
+    else:
+        messages.success(request, 'That Venue has no vents at this Time.')
+        return redirect('admin_aprroval')
+
+
+
+
 # admin approval
 def admin_aprroval(request):
+    venue_list = Venue.objects.all()
     event_list = Event.objects.all().order_by('-event_date')
+    event_count = Event.objects.all().count()
+    venue_count = Venue.objects.all().count()
+    user_count = User.objects.all().count()
+
     if request.user.is_superuser:
         if request.method == "POST":
             id_list = request.POST.getlist('boxes')
@@ -32,7 +55,13 @@ def admin_aprroval(request):
             return redirect('list-events')
 
         else:
-            return render(request,  'events/admin_approval.html', {"event_list":event_list})
+            return render(request,  'events/admin_approval.html', {
+                "event_list":event_list,
+                'event_count':event_count,
+                'venue_count':venue_count,
+                'user_count':user_count,
+                'venue_list':venue_list,
+               })
     else:
         messages.success(request, 'You arenot autorized for this page')
         return redirect('home')

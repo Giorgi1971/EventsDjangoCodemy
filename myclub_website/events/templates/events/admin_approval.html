@@ -5,10 +5,42 @@
 
 <center>
 
-    <h1> Admin Event Approval Portal</h1>
+    <h1> Admin DashBoard</h1>
 
         <form action="" method="POST">
-            {% csrf_token %}
+            {% csrf_token %} <br>
+            Event Count: {{event_count}} <br>
+            Venue Count: {{venue_count}} <br>
+            User Count: {{user_count}} <br> <br>
+
+
+            <h2>
+                Venue
+            </h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Venue Name</th>
+                        <th scope="col">Venue Date</th>
+                        <th scope="col">owner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for venue in venue_list %}
+                    <tr>
+                    <th scope="row">{{counter}}</th>
+                    <td><a href="{% url 'venue_events' venue.pk %}">{{venue}}</a></td>
+                    <td>{{venue.address}}</td>
+                    <td>{{venue.owner.}}</td>
+
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            <h2>
+                Event Aprooval Form.
+            </h2><br>
     <table class="table table-striped">
         <thead>
             <tr>

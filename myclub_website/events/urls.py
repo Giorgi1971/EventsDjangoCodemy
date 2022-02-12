@@ -28,8 +28,8 @@ urlpatterns = [
     path('my_events/', views.my_events, name='my_events'),
     path('search_events/', views.search_events, name='search_events'),
     path('admin_aprroval/', views.admin_aprroval, name='admin_aprroval'),
-
-
-
+    path('venue_events/<venue_id>/', views.venue_events, name='venue_events'),
+    path('show_event/<int:pk>/', views.show_event, name='show_event'),
+    
 ]
 

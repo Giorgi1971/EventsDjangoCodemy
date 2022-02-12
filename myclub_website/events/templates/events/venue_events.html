@@ -1,0 +1,17 @@
+{% extends 'events/base.html' %}
+
+{% block content %}
+
+<h1>List Events</h1>
+
+<ul>
+    {% for item in venue_events %}
+    <li>
+        <a href="{% url 'show_event' item.pk %}">
+            {{item}}
+        </a>
+    </li>
+    {%endfor%}
+</ul>
+
+{% endblock %}
