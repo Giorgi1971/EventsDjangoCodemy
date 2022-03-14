@@ -18,8 +18,27 @@
     <br>
 {%if venue.venue_image%}
 <img style="width: 300px;" src="{{ venue.venue_image.url }}" alt="asasasa"> 
+{%endif%}
 
+<br>
+<br>
+<br>
+<h3>
+    Events for this Venue ...
+</h3>
+<br>
+{% if events %}
+{% for item in events %}
+<li>
+    <a href="{% url 'show_event' item.pk %}">
+        {{item}}
+    </a>
+</li>
+{%endfor%}
 
+{% else %}
+
+<h4>No Events Sceduled At This Time.</h4>
 {%endif%}
 
 </center>

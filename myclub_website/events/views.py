@@ -24,10 +24,10 @@ def show_event(request, pk):
 
 
 def venue_events(request, venue_id):
-    ven = Venue.objects.get(pk=venue_id)
-    venue_s = Event.objects.filter(venue=ven)
-    if venue_s:
-        return render(request, 'events/venue_events.html', {'venue_events':venue_s}) 
+    venue = Venue.objects.get(pk=venue_id)
+    events = venue.event_set.all()
+    if events:
+        return render(request, 'events/venue_events.html', {'venue_events':events}) 
     else:
         messages.success(request, 'That Venue has no Events at this Time.')
         return redirect('admin_aprroval')
@@ -230,8 +230,12 @@ def search_venue(request):
 
 def venue_detail(request, venue_id):
     venue = Venue.objects.get(pk=venue_id)
+    events = venue.event_set.all()
+
     venue_owner = User.objects.get(pk=venue.owner)
-    return render(request, 'events/venue_detail.html', {'venue':venue, 'venue_owner':venue_owner})
+    return render(request, 'events/venue_detail.html', {
+        'events':events, 'venue':venue, 'venue_owner':venue_owner
+        })
 
 
 def list_venue(request):
