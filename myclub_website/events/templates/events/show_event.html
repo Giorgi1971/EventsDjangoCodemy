@@ -4,26 +4,15 @@
 {% block content %}
 
 <center>
-<h1>Event:</h1>
-<h5> {{ event.name }} </h5>
-<h5> {{ event.address }} </h5>
-<h5> {{ event.zip_code }} </h5>
-<h5> {{ event.phone }} </h5>
-<h5><a href="{{ venue.web }}">
- {{ event.web }} 
-</a> </h5>
-<h5> {{ event.email_address }} </h5>
-<h5>Owner: {{ event }} </h5>
-    
     <br>
-{%if venue.venue_image%}
-<img style="width: 300px;" src="{{ venue.venue_image.url }}" alt="asasasa"> 
+    {%if venue.venue_image%}
+    <img style="width: 300px;" src="{{ venue.venue_image.url }}" alt="asasasa"> 
+    
 
-
-{%endif%}
-<div class="card">
-    <div class="card-header">
-        {{ item }}
+    {%endif%}
+    <div class="card">
+        <div class="card-header">
+            Meneger: {{ item.manager }}
     </div>
     <div class="card-body">
         <h5 class="card-title">Venue: {{ item.venue }}</h5>
@@ -33,7 +22,6 @@
             <li>Days till Event: {{ item.Days_till }}.</li>
             <li>Occured: {{ item.Is_past }}</li>
             <li>Venue: {{ item.venue.web }}</li>
-            <li>Manager: {{ item.manager }}</li>
             <li>Desc: {{ item.description }}</li>
             <li>Approved: {{ item.approved }}</li>
             <ul>

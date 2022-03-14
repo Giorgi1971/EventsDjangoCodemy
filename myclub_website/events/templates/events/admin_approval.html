@@ -23,16 +23,16 @@
                         <th scope="col">#</th>
                         <th scope="col">Venue Name</th>
                         <th scope="col">Venue Date</th>
-                        <th scope="col">owner</th>
+                        <th scope="col">Events</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for venue in venue_list %}
                     <tr>
                     <th scope="row">{{counter}}</th>
-                    <td><a href="{% url 'venue_events' venue.pk %}">{{venue}}</a></td>
+                    <td><a href="{% url 'venue_detail' venue.pk %}">{{venue}}</a></td>
                     <td>{{venue.address}}</td>
-                    <td>{{venue.owner.}}</td>
+                    <td><a class="btn btn-sm btn-secondary" href="{% url 'venue_events' venue.pk %}">List Events</a></td>
 
                   </tr>
                   {% endfor %}

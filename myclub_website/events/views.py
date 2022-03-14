@@ -29,10 +29,8 @@ def venue_events(request, venue_id):
     if venue_s:
         return render(request, 'events/venue_events.html', {'venue_events':venue_s}) 
     else:
-        messages.success(request, 'That Venue has no vents at this Time.')
+        messages.success(request, 'That Venue has no Events at this Time.')
         return redirect('admin_aprroval')
-
-
 
 
 # admin approval
